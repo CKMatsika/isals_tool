@@ -1,52 +1,24 @@
 import { Suspense } from 'react'
-import Link from 'next/link'
-import DashboardHeader from '../components/DashboardHeader'
-import SavingsOverview from '../components/SavingsOverview'
-import LoanOverview from '../components/LoanOverview'
-import Feedback from '../components/Feedback'
+import DashboardContent from './dashboard-content'
 
-// Create loading components
-function LoadingCard() {
+// Loading component for Suspense fallback
+function LoadingState() {
   return (
-    <div className="w-full h-48 bg-gray-100 rounded-lg animate-pulse" />
+    <div className="container mx-auto px-4 py-8">
+      <div className="w-full h-24 bg-gray-200 rounded-lg animate-pulse mb-6" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="w-full h-64 bg-gray-200 rounded-lg animate-pulse" />
+        <div className="w-full h-64 bg-gray-200 rounded-lg animate-pulse" />
+      </div>
+    </div>
   )
 }
 
-export default function Dashboard() {
+export default function DashboardPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Suspense fallback={<LoadingCard />}>
-        <DashboardHeader />
-      </Suspense>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        <Suspense fallback={<LoadingCard />}>
-          <SavingsOverview />
-        </Suspense>
-        <Suspense fallback={<LoadingCard />}>
-          <LoanOverview />
-        </Suspense>
-      </div>
-
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Link 
-          href="/goals" 
-          className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-6 rounded-lg text-center transition duration-300"
-        >
-          Goal Setting and Tracking
-        </Link>
-        <Link 
-          href="/financial-education" 
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-lg text-center transition duration-300"
-        >
-          Financial Education
-        </Link>
-      </div>
-
-      <Suspense fallback={<LoadingCard />}>
-        <Feedback />
-      </Suspense>
-    </div>
+    <Suspense fallback={<LoadingState />}>
+      <DashboardContent />
+    </Suspense>
   )
 }
 
