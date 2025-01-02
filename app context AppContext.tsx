@@ -1,6 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 type Member = {
   name: string
@@ -79,11 +80,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   ])
 
   const [user, setUser] = useState<User | null>(null)
+  const router = useRouter()
 
   useEffect(() => {
+    // Check for auth token in cookies
+    const hasAuthToken = document.cookie.includes('auth_token=true')
     const storedUser = localStorage.getItem('user')
-    if (storedUser) {
+    
+    if (hasAuthToken && storedUser) {
       setUser(JSON.parse(storedUser))
+    } else {
+      // Clear any existing user data if no auth token
+      setUser(null)
+      localStorage.removeItem('user')
     }
   }, [])
 
@@ -125,6 +134,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const logout = () => {
     setUser(null)
     localStorage.removeItem('user')
+    document.cookie = 'auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT'
+    router.push('/login')
   }
 
   return (
