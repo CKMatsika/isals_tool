@@ -1,62 +1,85 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useAppContext } from '../context/AppContext'
 import { toast } from 'react-hot-toast'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const { login } = useAppContext()
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsLoading(true)
+
     try {
       const success = await login(username, password)
       if (success) {
+        // Set auth cookie
+        document.cookie = `auth_token=true; path=/; max-age=${60 * 60 * 24 * 7}` // 7 days
         toast.success('Logged in successfully!')
+        router.push('/dashboard')
       } else {
         toast.error('Invalid credentials')
       }
     } catch (error) {
       toast.error('An error occurred during login')
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-          Username
-        </label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          required
-        />
+    <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+      <div className="space-y-4">
+        <div>
+          <Label htmlFor="username">Username</Label>
+          <Input
+            id="username"
+            name="username"
+            type="text"
+            required
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="mt-1"
+            placeholder="Enter your username"
+          />
+        </div>
+        <div>
+          <Label htmlFor="password">Password</Label>
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="mt-1"
+            placeholder="Enter your password"
+          />
+        </div>
       </div>
-      <div>
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-          Password
-        </label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          required
-        />
-      </div>
-      <button
+
+      <Button
         type="submit"
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        className="w-full"
+        disabled={isLoading}
       >
-        Log In
-      </button>
+        {isLoading ? 'Signing in...' : 'Sign in'}
+      </Button>
+
+      <div className="text-sm text-center mt-4 text-gray-600">
+        <p>Demo credentials:</p>
+        <p>Username: admin</p>
+        <p>Password: password</p>
+      </div>
     </form>
   )
 }
