@@ -3,7 +3,7 @@
   "displayName": "Isals Portolio App",
   "version": "1.0.0",
   "slug": "your-app-slug",
-  "sdkVersion": "XX.0.0", // Replace with your SDK version
+  "sdkVersion": "18.2.0", // Replace with your SDK version
   "platforms": ["ios", "android"],
   "orientation": "portrait",
   "icon": "./assets/icon.png", // Path to your app icon
