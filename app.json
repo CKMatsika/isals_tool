@@ -1,0 +1,31 @@
+{
+  "name": "Isals Portfolio Tracking App",
+  "displayName": "Isals Portolio App",
+  "version": "1.0.0",
+  "slug": "your-app-slug",
+  "sdkVersion": "XX.0.0", // Replace with your SDK version
+  "platforms": ["ios", "android"],
+  "orientation": "portrait",
+  "icon": "./assets/icon.png", // Path to your app icon
+  "splash": {
+    "image": "./assets/splash.png", // Path to your splash screen
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff" // Background color for splash
+  },
+  "updates": {
+    "fallbackToCacheTimeout": 0
+  },
+  "assetBundlePatterns": ["**/*"],
+  "ios": {
+    "supportsTablet": true
+  },
+  "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png",
+      "backgroundColor": "#FFFFFF"
+    }
+  },
+  "web": {
+    "favicon": "./assets/favicon.png"
+  }
+}
