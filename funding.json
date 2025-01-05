@@ -1,0 +1,54 @@
+{
+  "name": "ISALs Portfolio Tracking Tool",
+  "description": "A tool to empower rural women groups in Zimbabwe by assisting NGOs in tracking Internal Savings and Lending Schemes (ISALs). This free tool helps manage financial records, track portfolios, and improve financial education for sustainable development.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "https://github.com/CKMatsika/isals-_portifolio_tracking_tool",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CKMatsika/isals-_portifolio_tracking_tool.git"
+  },
+  "author": {
+    "name": "CK Matsika",
+    "email": "email@example.com",
+    "organization": "Women's Rights NGO",
+    "country": "Zimbabwe"
+  },
+  "funding": {
+    "type": "grants",
+    "source": "FLOSS funding",
+    "impact": {
+      "target_population": "Women-led rural groups in Zimbabwe",
+      "goal": "Provide a free tool for NGOs to empower rural communities, enhance transparency, and improve financial literacy through ISALs tracking."
+    },
+    "development_goals": [
+      "Further development of the tool to assist NGOs in improving their operational capacity.",
+      "Enabling NGOs to attract more funding by providing transparent and accurate financial tracking.",
+      "Expanding the tool to support multilingual functionality and integration with other NGO management systems."
+    ],
+    "need_for_funding": "To sustain the development of this free app and further improve its usability, scalability, and impact on rural livelihoods."
+  },
+  "financial_requirements": {
+    "requested_amount": 50000,
+    "currency": "USD",
+    "breakdown": {
+      "development": 20000,
+      "maintenance": 10000,
+      "scalability_and_integration": 15000,
+      "training_and_support": 5000
+    },
+    "total": 50000,
+    "timeline": "12 months"
+  },
+  "contributors": [
+    {
+      "name": "CK Matsika",
+      "role": "Lead Developer",
+      "contact": "email@example.com"
+    },
+    {
+      "name": "Women's Rights NGO",
+      "role": "Consulting Organization"
+    }
+  ]
+}
